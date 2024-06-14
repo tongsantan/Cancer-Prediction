@@ -1,0 +1,23 @@
+[2024-06-14 15:44:16,362: INFO: main: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2024-06-14 15:44:16,362: INFO: data_ingestion: Entered the data ingestion method or component]
+[2024-06-14 15:44:16,383: INFO: data_ingestion: Read the dataset as dataframe]
+[2024-06-14 15:44:16,401: INFO: data_ingestion: Train test split initiated]
+[2024-06-14 15:44:16,414: INFO: data_ingestion: Ingestion of the data is completed]
+[2024-06-14 15:44:16,414: INFO: main: >>>>>> stage Data Ingestion stage completed <<<<<<
+
+x==========x]
+[2024-06-14 15:44:16,414: INFO: main: >>>>>> stage Data Transformation stage started <<<<<<]
+[2024-06-14 15:44:16,436: INFO: data_transformation: Read train and test data completed]
+[2024-06-14 15:44:16,437: INFO: data_transformation: Obtaining preprocessing object]
+[2024-06-14 15:44:16,437: INFO: data_transformation: Numerical columns: ['mean_radius', 'mean_texture', 'mean_perimeter', 'mean_area', 'mean_smoothness', 'mean_compactness', 'mean_concavity', 'mean_concave_points', 'mean_symmetry', 'mean_fractal_dimension', 'radius_error', 'texture_error', 'perimeter_error', 'area_error', 'smoothness_error', 'compactness_error', 'concavity_error', 'concave_points_error', 'symmetry_error', 'fractal_dimension_error', 'worst_radius', 'worst_texture', 'worst_perimeter', 'worst_area', 'worst_smoothness', 'worst_compactness', 'worst_concavity', 'worst_concave_points', 'worst_symmetry', 'worst_fractal_dimension']]
+[2024-06-14 15:44:16,438: INFO: data_transformation: Applying preprocessing object on training dataframe and testing dataframe.]
+[2024-06-14 15:44:16,444: INFO: data_transformation: Saved preprocessing object.]
+[2024-06-14 15:44:16,445: INFO: main: >>>>>> stage Data Transformation stage completed <<<<<<
+
+x==========x]
+[2024-06-14 15:44:16,446: INFO: main: >>>>>> stage Model Training stage started <<<<<<]
+[2024-06-14 15:44:16,446: INFO: model_trainer: Split training and test input data]
+[2024-06-14 15:44:22,302: INFO: model_trainer: Best found model on both training and testing dataset]
+[2024-06-14 15:44:22,318: INFO: main: >>>>>> stage Model Training stage completed <<<<<<
+
+x==========x]
