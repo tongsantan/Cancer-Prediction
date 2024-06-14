@@ -1,0 +1,169 @@
+<html>
+<body>
+    <div class="login">
+       <h1>Breast Cancer (Classification Problem)</h1>
+       <form action="{{ url_for('predict_datapoint')}}" method="post">
+        <h1>
+            <legend>Breast Cancer Prediction</legend>
+        </h1>
+        <div class="mb-3">
+            <label class="form-label">mean_radius</label>
+            <input class="form-control" type="number" name="mean_radius"
+                placeholder="Enter the mean_radius" min='6' max='29' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">mean_texture</label>
+            <input class="form-control" type="number" name="mean_texture"
+                placeholder="Enter the mean_texture" min='9' max='39' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">mean_perimeter</label>
+            <input class="form-control" type="number" name="mean_perimeter"
+                placeholder="Enter the mean_perimeter" min='43' max='188' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">mean_area</label>
+            <input class="form-control" type="number" name="mean_area"
+                placeholder="Enter the mean_area" min='143' max='2501' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">mean_smoothness</label>
+            <input class="form-control" type="number" name="mean_smoothness"
+                placeholder="Enter the mean_smoothness" min='0.05' max='0.16' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">mean_compactness</label>
+            <input class="form-control" type="number" name="mean_compactness"
+                placeholder="Enter the mean_compactness" min='0.019' max='0.345' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">mean_concavity</label>
+            <input class="form-control" type="number" name="mean_concavity"
+                placeholder="Enter the mean_concavity" min='0' max='0.426' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">mean_concave_points</label>
+            <input class="form-control" type="number" name="mean_concave_points"
+                placeholder="Enter the mean_concave_points" min='0' max='0.2' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">mean_symmetry</label>
+            <input class="form-control" type="number" name="mean_symmetry"
+                placeholder="Enter the mean_symmetry" min='0.106' max='0.304' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">mean_fractal_dimension</label>
+            <input class="form-control" type="number" name="mean_fractal_dimension"
+                placeholder="Enter the mean_fractal_dimension" min='0.0499' max='0.097' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">radius_error</label>
+            <input class="form-control" type="number" name="radius_error"
+                placeholder="Enter the radius_error" min='0.1115' max='2.873' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">texture_error</label>
+            <input class="form-control" type="number" name="texture_error"
+                placeholder="Enter the texture_error" min='0.36' max='4.88' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">perimeter_error</label>
+            <input class="form-control" type="number" name="perimeter_error"
+                placeholder="Enter the perimeter_error" min='0.757' max='21.98' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">area_error</label>
+            <input class="form-control" type="number" name="area_error"
+                placeholder="Enter the area_error" min='6.8' max='542.2' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">smoothness_error</label>
+            <input class="form-control" type="number" name="smoothness_error"
+                placeholder="Enter the smoothness_error" min='0.0017' max='0.03113' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">compactness_error</label>
+            <input class="form-control" type="number" name="compactness_error"
+                placeholder="Enter the compactness_error" min='0.00225' max='0.135' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">concavity_error</label>
+            <input class="form-control" type="number" name="concavity_error"
+                placeholder="Enter the concavity_error" min='0' max='0.396' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">concave_points_error</label>
+            <input class="form-control" type="number" name="concave_points_error"
+                placeholder="Enter the concave_points_error" min='0' max='0.0527' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">symmetry_error</label>
+            <input class="form-control" type="number" name="symmetry_error"
+                placeholder="Enter the symmetry_error" min='0.00788' max='0.0789' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">fractal_dimension_error</label>
+            <input class="form-control" type="number" name="fractal_dimension_error"
+                placeholder="Enter the fractal_dimension_error" min='0.000895' max='0.02984' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">worst_radius</label>
+            <input class="form-control" type="number" name="worst_radius"
+                placeholder="Enter the worst_radius" min='7.93' max='36' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">worst_texture</label>
+            <input class="form-control" type="number" name="worst_texture"
+                placeholder="Enter the worst_texture" min='12' max='49' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">worst_perimeter</label>
+            <input class="form-control" type="number" name="worst_perimeter"
+                placeholder="Enter the worst_perimeter" min='50.4' max='251.2' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">worst_area</label>
+            <input class="form-control" type="number" name="worst_area"
+                placeholder="Enter the worst_area" min='185.2' max='4254' />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">worst_smoothness</label>
+            <input class="form-control" type="number" name="worst_smoothness"
+                placeholder="Enter the worst_smoothness" min='0.0711' max='0.222' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">worst_compactness</label>
+            <input class="form-control" type="number" name="worst_compactness"
+                placeholder="Enter the worst_compactness" min='0.0273' max='1.058' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">worst_concavity</label>
+            <input class="form-control" type="number" name="worst_concavity"
+                placeholder="Enter the worst_concavity" min='0' max='1.252' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">worst_concave_points</label>
+            <input class="form-control" type="number" name="worst_concave_points"
+                placeholder="Enter the worst_concave_points" min='0' max='0.291' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">worst_symmetry</label>
+            <input class="form-control" type="number" name="worst_symmetry"
+                placeholder="Enter the worst_symmetry" min='0.1565' max='0.6638' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">worst_fractal_dimension</label>
+            <input class="form-control" type="number" name="worst_fractal_dimension"
+                placeholder="Enter the worst_fractal_dimension" min='0.055' max='0.207' step='.001'/>
+        </div>
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Predict the breast cancer type" required />
+        </div>
+    </form>
+    <h2>
+       THE  prediction is {{results}}
+    </h2>
+   <body>
+</html>
+
+
