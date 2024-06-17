@@ -3,7 +3,8 @@ import sys
 from src.exception import CustomException
 from src import logger
 import pandas as pd
-
+import numpy as np
+from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import StratifiedShuffleSplit
 from dataclasses import dataclass
 
@@ -21,7 +22,17 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logger.info("Entered the data ingestion method or component")
         try:
-            df=pd.read_csv('notebook\processed_data\cancer.csv')
+            df_bc = load_breast_cancer() 
+            data = np.c_[df_bc.data, df_bc.target]
+            column_names = np.append(df_bc.feature_names, ['malignant'])
+            df = pd.DataFrame(data, columns=column_names)
+            df.columns = df.columns.str.replace(' ', '_')
+            df['malignant'] = df['malignant'].map(lambda x: 1 if x != 1.0 else 0)
+            os.makedirs("./data", exist_ok=True)
+            df.to_csv("./data/cancer.csv", index = False)
+
+
+            df=pd.read_csv('./data/cancer.csv')
             logger.info('Read the dataset as dataframe')
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
