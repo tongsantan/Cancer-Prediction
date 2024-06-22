@@ -30,6 +30,10 @@ class DataIngestion:
             column_names = np.append(df_bc.feature_names, ['malignant'])
             
             df = pd.DataFrame(data, columns=column_names)
+
+            df = df.drop(columns = ['mean perimeter', 'mean area', 'worst radius', 'worst perimeter', 'worst area', 'fractal dimension error', 'mean fractal dimension','radius error',
+                        'texture error', 'smoothness error', 'symmetry error', 'worst texture', 'worst smoothness', 'worst compactness', 'worst concavity', 'worst concave points', 
+                        'worst symmetry', 'worst fractal dimension', 'perimeter error', 'area error', 'concavity error', 'concave points error', 'compactness error'])
             
             df.columns = df.columns.str.replace(' ', '_')
             
