@@ -1,6 +1,8 @@
+## 5. Update the components
+import os
 import sys
 from dataclasses import dataclass
-
+from src.entity.config_entity import DataTransformationConfig
 import numpy as np 
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -8,17 +10,13 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from src.exception import CustomException
 from src import logger
-import os
+from src.utils.common import save_object
 
-from src.utils import save_object
-
-@dataclass
-class DataTransformationConfig:
-    preprocessor_obj_file_path=os.path.join('output',"preprocessor.pkl")
+## 5. Update the components
 
 class DataTransformation:
-    def __init__(self):
-        self.data_transformation_config=DataTransformationConfig()
+    def __init__(self, config: DataTransformationConfig):
+        self.config=config
 
     def get_data_transformer_object(self):
         '''
@@ -48,11 +46,11 @@ class DataTransformation:
         except Exception as e:
             raise CustomException(e,sys)
         
-    def initiate_data_transformation(self,train_path,test_path):
+    def initiate_data_transformation(self):
 
         try:
-            train_df=pd.read_csv(train_path)
-            test_df=pd.read_csv(test_path)
+            train_df=pd.read_csv(self.config.train_data_path)
+            test_df=pd.read_csv(self.config.test_data_path)
 
             logger.info("Read train and test data completed")
 
@@ -81,19 +79,23 @@ class DataTransformation:
             
             test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
 
+            np.save(self.config.train_array_path, train_arr)
+            np.save(self.config.test_array_path, test_arr)
+
+
             logger.info(f"Saved preprocessing object.")
 
             save_object(
 
-                file_path=self.data_transformation_config.preprocessor_obj_file_path,
+                file_path=self.config.preprocessor_obj_file_path,
                 obj=preprocessing_obj
 
             )
 
             return (
-                train_arr,
-                test_arr,
-                self.data_transformation_config.preprocessor_obj_file_path,
+                self.config.train_array_path,
+                self.config.test_array_path,
+                self.config.preprocessor_obj_file_path,
             )
         except Exception as e:
             raise CustomException(e,sys)

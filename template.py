@@ -9,17 +9,19 @@ list_of_files = [
     ".github/workflows/.gitkeep",
     "src/__init__.py",
     "src/components/__init__.py",
-    "src/utils.py",
-    "src/exception.py",
-    "src/pipeline/predict_pipeline.py",
+    "src/utils/__init__.py",
+    "src/config/__init__.py",
+    "src/config/configuration.py",
+    "src/pipeline/__init__.py",
+    "src/entity/__init__.py",
+    "src/constants/__init__.py",
+    "config/config.yaml",
     "requirements.txt",
     "setup.py",
-    "main.py",
+    "notebook/Modelling_Breast_Cancer.ipynb",
     "Dockerfile",
     "app.py",
-    "notebook/Modelling_Breast_Cancer.ipynb",
-    "templates/home.html"
-
+    "main.py"
 ]
 
 for filepath in list_of_files:

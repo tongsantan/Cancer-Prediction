@@ -1,26 +1,26 @@
 import os
 import sys
-from dataclasses import dataclass
 from sklearn.metrics import confusion_matrix
 from src.exception import CustomException
 from src import logger
-from src.utils import save_object,evaluate_models
+from src.utils.common import save_object,evaluate_models
 from src.params import params
 from src.models import models
 import warnings
 warnings.filterwarnings("ignore")
+import numpy as np
+from src.entity.config_entity import ModelTrainerConfig
 
-@dataclass
-class ModelTrainerConfig:
-    trained_model_file_path=os.path.join("output","model.pkl")
+## 5. Update the components
 
 class ModelTrainer:
-    def __init__(self):
-        self.model_trainer_config=ModelTrainerConfig()
+    def __init__(self, config:ModelTrainerConfig):
+        self.config=config
 
-
-    def initiate_model_trainer(self,train_array,test_array):
+    def initiate_model_trainer(self):
         try:
+            train_array=np.load(self.config.train_array_path)
+            test_array=np.load(self.config.test_array_path)
             logger.info("Split training and test input data")
             X_train,y_train,X_test,y_test=(
                 train_array[:,:-1],
@@ -46,7 +46,7 @@ class ModelTrainer:
             logger.info(f"Best found model on both training and testing dataset")
 
             save_object(
-                file_path=self.model_trainer_config.trained_model_file_path,
+                file_path=self.config.trained_model_file_path,
                 obj=best_model
             )
 
@@ -56,8 +56,10 @@ class ModelTrainer:
 
             cm = confusion_matrix(y_test, predicted)
 
+            logger.info(f"best model: {best_model_name}; best F1 score: {best_model_score}; confusion matrix: {cm};")
+
             return best_model_name, best_model_score, cm
             
 
         except Exception as e:
-            raise CustomException(e,sys)
+            raise CustomException(e,sys)    
