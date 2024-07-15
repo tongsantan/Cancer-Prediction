@@ -50,10 +50,10 @@ class DataIngestion:
         logger.info("Resume data ingestion method or component") 
 
         try:
-            df=pd.read_csv(self.config.processed_data_path)
-            
             logger.info('Read the dataset as dataframe')
 
+            df=pd.read_csv(self.config.processed_data_path)
+            
             strat_shuff_split = StratifiedShuffleSplit(n_splits=1, test_size=0.3, random_state=42)
         
             X = df.drop(columns=['malignant'],axis=1)
