@@ -3,57 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Breast Cancer (Classification Problem)</title>
+    <title>Breast Cancer Prediction | AI-Powered Medical Analysis</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/styles.css">
-</head>   
+</head>
 <body>
-    <div class="login">
-       <h1>Breast Cancer Prediction</h1>
-       <form action="{{ url_for('predict_datapoint')}}" method="post">
-        </h1>
-        <div class="mb-3">
-            <label class="form-label">mean_radius</label>
-            <input class="form-control" type="number" name="mean_radius"
-                placeholder="Enter the mean_radius" min='6' max='29' />
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-heartbeat"></i> Breast Cancer Prediction</h1>
+            <p>Advanced AI-powered analysis for early detection support</p>
         </div>
-        <div class="mb-3">
-            <label class="form-label">mean_texture</label>
-            <input class="form-control" type="number" name="mean_texture"
-                placeholder="Enter the mean_texture" min='9' max='39' />
+
+        <div class="main-content">
+            <div class="form-section">
+                <div class="feature-info">
+                    <h3><i class="fas fa-info-circle"></i> About the Analysis</h3>
+                    <p>This tool uses machine learning to analyze cell nucleus characteristics from fine needle aspirate (FNA) samples. Please enter the measured values for each parameter.</p>
+                    <div class="feature-list">
+                        <div>• Radius: Mean distance from center to perimeter</div>
+                        <div>• Texture: Standard deviation of gray-scale values</div>
+                        <div>• Smoothness: Local variation in radius lengths</div>
+                        <div>• Compactness: Perimeter² / area - 1.0</div>
+                        <div>• Concavity: Severity of concave portions</div>
+                        <div>• Concave points: Number of concave portions</div>
+                        <div>• Symmetry: Cell nucleus symmetry measure</div>
+                    </div>
+                </div>
+
+                <form action="/predictdata" method="post" id="predictionForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="mean_radius"><i class="fas fa-circle"></i> Mean Radius</label>
+                            <input type="number" 
+                                   id="mean_radius" 
+                                   name="mean_radius" 
+                                   step="0.01" 
+                                   min="6" 
+                                   max="29" 
+                                   required 
+                                   placeholder="e.g., 14.5">
+                            <div class="input-info">Range: 6.0 - 29.0 (typical: 10-20)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mean_texture"><i class="fas fa-grip-horizontal"></i> Mean Texture</label>
+                            <input type="number" 
+                                   id="mean_texture" 
+                                   name="mean_texture" 
+                                   step="0.01" 
+                                   min="9" 
+                                   max="39" 
+                                   required 
+                                   placeholder="e.g., 19.2">
+                            <div class="input-info">Range: 9.0 - 39.0 (typical: 15-25)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mean_smoothness"><i class="fas fa-water"></i> Mean Smoothness</label>
+                            <input type="number" 
+                                   id="mean_smoothness" 
+                                   name="mean_smoothness" 
+                                   step="0.001" 
+                                   min="0.05" 
+                                   max="0.16" 
+                                   required 
+                                   placeholder="e.g., 0.095">
+                            <div class="input-info">Range: 0.05 - 0.16 (typical: 0.08-0.12)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mean_compactness"><i class="fas fa-compress"></i> Mean Compactness</label>
+                            <input type="number" 
+                                   id="mean_compactness" 
+                                   name="mean_compactness" 
+                                   step="0.001" 
+                                   min="0.019" 
+                                   max="0.345" 
+                                   required 
+                                   placeholder="e.g., 0.084">
+                            <div class="input-info">Range: 0.019 - 0.345 (typical: 0.05-0.15)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mean_concavity"><i class="fas fa-indent"></i> Mean Concavity</label>
+                            <input type="number" 
+                                   id="mean_concavity" 
+                                   name="mean_concavity" 
+                                   step="0.001" 
+                                   min="0" 
+                                   max="0.426" 
+                                   required 
+                                   placeholder="e.g., 0.048">
+                            <div class="input-info">Range: 0.0 - 0.426 (typical: 0.02-0.15)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mean_concave_points"><i class="fas fa-bullseye"></i> Mean Concave Points</label>
+                            <input type="number" 
+                                   id="mean_concave_points" 
+                                   name="mean_concave_points" 
+                                   step="0.001" 
+                                   min="0" 
+                                   max="0.2" 
+                                   required 
+                                   placeholder="e.g., 0.038">
+                            <div class="input-info">Range: 0.0 - 0.2 (typical: 0.01-0.08)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mean_symmetry"><i class="fas fa-balance-scale"></i> Mean Symmetry</label>
+                            <input type="number" 
+                                   id="mean_symmetry" 
+                                   name="mean_symmetry" 
+                                   step="0.001" 
+                                   min="0.106" 
+                                   max="0.304" 
+                                   required 
+                                   placeholder="e.g., 0.181">
+                            <div class="input-info">Range: 0.106 - 0.304 (typical: 0.15-0.22)</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="submit-section">
+                <button type="submit" form="predictionForm" class="submit-btn" id="submitBtn">
+                    <i class="fas fa-search"></i> Analyze Sample
+                </button>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing sample data...</p>
+                </div>
+            </div>
+
+            {% if results %}
+            <div class="result-section">
+                <div class="result-box {% if 'Malignant' in results %}result-malignant{% else %}result-benign{% endif %}">
+                    <div class="result-icon">
+                        {% if 'Malignant' in results %}
+                            <i class="fas fa-exclamation-triangle" style="color: #dc3545;"></i>
+                        {% else %}
+                            <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                        {% endif %}
+                    </div>
+                    <div class="result-text">
+                        Prediction Result: {{ results }}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="disclaimer">
+                <h4><i class="fas fa-exclamation-triangle"></i> Important Medical Disclaimer</h4>
+                <p><strong>This tool is for educational and research purposes only.</strong> It should not be used as a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of qualified healthcare providers with any questions regarding medical conditions. Never disregard professional medical advice or delay seeking treatment based on information from this tool.</p>
+            </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label">mean_smoothness</label>
-            <input class="form-control" type="number" name="mean_smoothness"
-                placeholder="Enter the mean_smoothness" min='0.05' max='0.16' step='.001'/>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">mean_compactness</label>
-            <input class="form-control" type="number" name="mean_compactness"
-                placeholder="Enter the mean_compactness" min='0.019' max='0.345' step='.001'/>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">mean_concavity</label>
-            <input class="form-control" type="number" name="mean_concavity"
-                placeholder="Enter the mean_concavity" min='0' max='0.426' step='.001'/>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">mean_concave_points</label>
-            <input class="form-control" type="number" name="mean_concave_points"
-                placeholder="Enter the mean_concave_points" min='0' max='0.2' step='.001'/>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">mean_symmetry</label>
-            <input class="form-control" type="number" name="mean_symmetry"
-                placeholder="Enter the mean_symmetry" min='0.106' max='0.304' step='.001'/>
-        </div>
-         <div class="mb-3">
-            <input class="btn btn-primary" type="submit" value="Predict the breast cancer type" required />
-        </div>
-    </form>
-    <h2>
-       THE  prediction is {{results}}
-    </h2>
+    </div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+            // Show loading animation
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('submitBtn').style.display = 'none';
+        });
+
+        // Add input validation and user feedback
+        const inputs = document.querySelectorAll('input[type="number"]');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                const value = parseFloat(this.value);
+                const min = parseFloat(this.min);
+                const max = parseFloat(this.max);
+                
+                if (value < min || value > max) {
+                    this.style.borderColor = '#dc3545';
+                    this.style.backgroundColor = '#fff5f5';
+                } else {
+                    this.style.borderColor = '#28a745';
+                    this.style.backgroundColor = '#f0fff4';
+                }
+            });
+        });
+
+        // Add form validation
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!input.value || input.value === '') {
+                    isValid = false;
+                    input.style.borderColor = '#dc3545';
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert('Please fill in all required fields with valid values.');
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('submitBtn').style.display = 'inline-block';
+            }
+        });
+    </script>
 </body>
 </html>
-
-

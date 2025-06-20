@@ -41,7 +41,12 @@ def predict_datapoint():
         print("Mid Prediction")
         results=predict_pipeline.predict(pred_df)
         print("after Prediction")
-        return render_template('home.html',results=results[0])
+        def decode(results):
+            if results[0] == 0.0:
+                return "The analysis suggests characteristics consistent with benign cells. However, regular monitoring and professional medical evaluation are still recommended."
+            elif results[0] == 1.0:
+                return "The analysis suggests characteristics consistent with malignant cells. Please consult with a healthcare professional immediately for further evaluation and diagnosis."
+        return render_template('home.html',results=decode(results))
     
 
 if __name__=="__main__":
